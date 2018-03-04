@@ -142,8 +142,8 @@ def sell():
                 print "Transaction completed."
                 command()
             else:
-            print "Input not recognized."
-            command()
+                print "Input not recognized."
+                command()
     else:
         print "Command not recongnized."
         command()
