@@ -101,6 +101,12 @@ def NY():
     global woodp
     print "Welcome to the New York market. There is %d wood at %d a piece." % (storewood, woodp)
     command()
+def Stockmarket():
+    print "Welcome to the wonderful world of making money out of speculation!"
+    if inventory >= 20
+        print "That's a lot of wood."
+        command()
+    command()
 storewood += 24
 woodp += 153
 bal += 123456
