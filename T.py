@@ -1,4 +1,4 @@
-bal = 0
+bal = 0 #your total balance of money
 storewood = 0
 woodp = 0
 woodinv = 0
