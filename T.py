@@ -103,7 +103,7 @@ def NY():
     command()
 def Stockmarket():
     print "Welcome to the wonderful world of making money out of speculation!"
-    if inventory >= 20
+    if inventory >= 20:
         print "That's a lot of wood."
         command()
     command()
