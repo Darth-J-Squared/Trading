@@ -22,7 +22,7 @@ def command():
     elif c in ("Sell", "sell", "S", "s"):
         sell()
     elif c in ("Inventory", "inventory", "Inv", "inv"):
-        print "You have %d wood." % (woodinv)
+        print "You have %d wood and %d steel." % (woodinv, steelinv)
         command()
     elif c in ("Help", "help"):
         print "Available commands are store, balance, buy, sell, and inventory."
