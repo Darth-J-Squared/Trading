@@ -120,7 +120,7 @@ def sell():
             storewood += amount
             print "Transaction completed."
             command()
-        if s in "Steel", "steel"):
+    if s in ("Steel", "steel"):
             if steelinv == 0:
                 print "You do not have any steel to sell."
                 command()
