@@ -2,6 +2,9 @@ bal = 0 #your total balance of money
 storewood = 0
 woodp = 0
 woodinv = 0
+storesteel = 0
+steelp = 0
+steelinv = 0
 def command():
     global bal
     c = raw_input(">")
@@ -32,6 +35,9 @@ def buy():
     global woodp
     global bal
     global woodinv
+    global storesteel
+    global steelp
+    global steelinv
     print "What would you like to buy?"
     b = raw_input(">")
     if b in ("Wood", "wood"):
@@ -56,6 +62,27 @@ def buy():
                 bal -= pp
                 print "Purchase completed."
                 command()
+    if b in ("Steel", "steel"):
+        print "How much would you like to buy? (there is %d left.)" % (storesteel)
+        steelamount = input(">")
+        spp = steelamount * steelp
+        if steelamount > storesteel:
+            print "There isn't that much product left."
+            buy()
+        elif steelamount * steelp > bal:
+            print "You don't have enough funds to complete the transaction."
+            command()
+        elif steelamount < 0:
+            print "You can't buy negative steel."
+            command()
+        else:
+            print "You are buying %d steel at %d a piece, for a total of %d dollars, leaving you with a balance of %d" % (steelamount, steelp, spp, bal - spp)
+            if confirm in ("Yes", "yes", "Y", "y"):
+                storesteel -= steelamount
+                steelinv += steelamount
+                bal -= spp
+                print "Purchase completed."
+                command()
             else:
                 print "Input not recognized."
                 command()
@@ -67,6 +94,9 @@ def sell():
     global woodp
     global bal
     global woodinv
+    global storesteel
+    global steelp
+    global steelinv
     print "What would you like to sell?"
     s = raw_input(">")
     if s in ("Wood", "wood"):
@@ -90,6 +120,27 @@ def sell():
             storewood += amount
             print "Transaction completed."
             command()
+        if s in "Steel", "steel"):
+            if steelinv == 0:
+                print "You do not have any steel to sell."
+                command()
+            print "How much would you like to sell? You have %d." % (steelinv)
+            steelamount = input(">")
+            steelsp = steelamount * steelp
+            if steelamount < 0:
+                print "You can't sell negative steel."
+                sell()
+            elif steelamount > steelinv
+                print "You don't have that much steel."
+                command()
+            print "You are selling %d steel at %d a piece, for a total of %d dollars, leaving you with a balance of %d" % (steelamount, steelp, steelsp, bal + steelsp)
+            confirm = raw_input("Sell?\n>")
+            if confirm in ("Yes", "yes", "Y", "y"):
+                steelinv -= steelamount
+                bal += steelsp
+                storesteel += steelamount
+                print "Transaction completed."
+                command()
         else:
             print "Input not recognized."
             command()
@@ -99,7 +150,7 @@ def sell():
 def NY():
     global storewood
     global woodp
-    print "Welcome to the New York market. There is %d wood at %d a piece." % (storewood, woodp)
+    print "Welcome to the New York market. There is %d wood at %d a piece. There is also %d steel at %d a piece." % (storewood, woodp, storesteel, steelp)
     command()
 def Stockmarket():
     print "Welcome to the wonderful world of making money out of speculation!"
@@ -110,4 +161,6 @@ def Stockmarket():
 storewood += 24
 woodp += 153
 bal += 123456
+steelp += 50
+storesteel += 100
 command()
