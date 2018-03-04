@@ -77,6 +77,7 @@ def buy():
             command()
         else:
             print "You are buying %d steel at %d a piece, for a total of %d dollars, leaving you with a balance of %d" % (steelamount, steelp, spp, bal - spp)
+            confirm = raw_input("Purchase?\n>")
             if confirm in ("Yes", "yes", "Y", "y"):
                 storesteel -= steelamount
                 steelinv += steelamount
