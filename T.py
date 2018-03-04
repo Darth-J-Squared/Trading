@@ -141,7 +141,7 @@ def sell():
                 storesteel += steelamount
                 print "Transaction completed."
                 command()
-        else:
+            else:
             print "Input not recognized."
             command()
     else:
