@@ -130,7 +130,7 @@ def sell():
             if steelamount < 0:
                 print "You can't sell negative steel."
                 sell()
-            elif steelamount > steelinv
+            elif steelamount > steelinv:
                 print "You don't have that much steel."
                 command()
             print "You are selling %d steel at %d a piece, for a total of %d dollars, leaving you with a balance of %d" % (steelamount, steelp, steelsp, bal + steelsp)
