@@ -25,7 +25,7 @@ def command():
         print "Available commands are store, balance, buy, sell, and inventory."
         command()
     else:
-        print "Command not recognized"
+        print "Command not recognized."
         command()
 def buy():
     global storewood
@@ -53,7 +53,7 @@ def buy():
             if confirm in ("Yes", "yes", "Y", "y"):
                 storewood -= amount
                 woodinv += amount
-                bal -= (amount * woodp)
+                bal -= pp
                 print "Purchase completed."
                 command()
             else:
@@ -86,7 +86,7 @@ def sell():
         confirm = raw_input("Sell?\n>")
         if confirm in ("Yes", "yes", "Y", "y"):
             woodinv -= amount
-            bal += (amount * woodp)
+            bal += sp
             storewood += amount
             print "Transaction completed."
             command()
