@@ -76,6 +76,9 @@ def buy():
                 bal -= pp
                 print "Purchase completed."
                 command()
+            else:
+                print "Transaction canceled."
+                command()
     elif b in ("Steel", "steel"):
         print "How much would you like to buy? (there is %d left.)" % (storesteel)
         steelamount = input(">")
@@ -99,7 +102,7 @@ def buy():
                 print "Purchase completed."
                 command()
             else:
-                print "Input not recognized."
+                print "Transaction canceled."
                 command()
     else:
         print "Command not recongnized."
@@ -157,7 +160,7 @@ def sell():
                 print "Transaction completed."
                 command()
             else:
-                print "Input not recognized."
+                print "Transaction canceled."
                 command()
     else:
         print "Command not recongnized."
