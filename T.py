@@ -1,3 +1,4 @@
+from random import *
 bal = 0 #your total balance of money
 storewood = 0
 woodp = 0
@@ -5,6 +6,17 @@ woodinv = 0
 storesteel = 0
 steelp = 0
 steelinv = 0
+pricechangewood = 0
+pricechangesteel = 0
+displaypricechangewood = 0
+change = "You shouldn't see this. Anyway, hi!"
+
+
+storewood += 24
+woodp += 153
+bal += 123456
+steelp += 50
+storesteel += 100
 def command():
     global bal
     c = raw_input(">")
@@ -24,8 +36,10 @@ def command():
     elif c in ("Inventory", "inventory", "Inv", "inv"):
         print "You have %d wood and %d steel." % (woodinv, steelinv)
         command()
+    elif c in ("Advance", "advance", "Adv", "adv", "A", "a"):
+        nextday()
     elif c in ("Help", "help"):
-        print "Available commands are store, balance, buy, sell, and inventory."
+        print "Available commands are store, balance, buy, sell, advance, and inventory."
         command()
     else:
         print "Command not recognized."
@@ -62,7 +76,7 @@ def buy():
                 bal -= pp
                 print "Purchase completed."
                 command()
-    if b in ("Steel", "steel"):
+    elif b in ("Steel", "steel"):
         print "How much would you like to buy? (there is %d left.)" % (storesteel)
         steelamount = input(">")
         spp = steelamount * steelp
@@ -121,7 +135,7 @@ def sell():
             storewood += amount
             print "Transaction completed."
             command()
-    if s in ("Steel", "steel"):
+    elif s in ("Steel", "steel"):
             if steelinv == 0:
                 print "You do not have any steel to sell."
                 command()
@@ -153,15 +167,29 @@ def NY():
     global woodp
     print "Welcome to the New York market. There is %d wood at %d a piece. There is also %d steel at %d a piece." % (storewood, woodp, storesteel, steelp)
     command()
+def nextday():
+    global woodp
+    global steelp
+    global pricechangewood
+    global pricechangesteel
+    global displaypricechangewood
+    global change
+    print "Proceeding to next day."
+    legacywoodp = '%.2f' % round(woodp, 2)
+    pricechangewood = uniform(.6, 1.4)
+    if pricechangewood > 1:
+        change = "increase"
+    else:
+        change = "decrease"
+    woodp *= pricechangewood
+    displaywoodp = '%.2f' % round(woodp, 2)
+    displaypricechangewood = "%.0f%%" % (pricechangewood * 100 - 100)
+    print "The price of wood changed to %s from %s, a %s of %s." % (displaywoodp, legacywoodp, change, displaypricechangewood)
+    command()
 def Stockmarket():
     print "Welcome to the wonderful world of making money out of speculation!"
     if inventory >= 20:
         print "That's a lot of wood."
         command()
     command()
-storewood += 24
-woodp += 153
-bal += 123456
-steelp += 50
-storesteel += 100
 command()
