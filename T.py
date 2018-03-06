@@ -9,10 +9,11 @@ steelinv = 0
 pricechangewood = 0
 pricechangesteel = 0
 displaypricechangewood = 0
+maxinv = 100
 woodchange = "You shouldn't see this. Anyway, hi!"
 
 
-storewood += 24
+storewood += 104
 woodprice += 153
 bal += 123456
 steelprice += 500
@@ -52,6 +53,7 @@ def buy():
     global storesteel
     global steelprice
     global steelinv
+    global maxinv
     print "What would you like to buy?"
     b = raw_input(">")
     if b in ("Wood", "wood"):
@@ -60,12 +62,15 @@ def buy():
         pp = amount * woodprice
         if amount > storewood:
             print "There isn't that much product left."
-            buy()
+            command()
         elif amount * woodprice > bal:
             print "You don't have enough funds to complete the transaction."
             command()
         elif amount < 0:
             print "You can't buy negative wood."
+            command()
+        elif woodinv + steelinv + amount > maxinv:
+            print "You do not have enough inventory space."
             command()
         else:
             print "You are buying %d wood at $%d a piece, for a total of $%d, leaving you with a balance of $%d" % (amount, woodprice, pp, bal - pp)
