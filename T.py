@@ -22,6 +22,7 @@ steelprice += 500
 storesteel += 100
 def command():
     global bal
+    global maxinv
     c = raw_input(">")
     if c in ("Store", "store", "S", "s"):
         NY()
@@ -37,7 +38,7 @@ def command():
     elif c in ("Sell", "sell", "S", "s"):
         sell()
     elif c in ("Inventory", "inventory", "Inv", "inv"):
-        print "You have %d wood and %d steel." % (woodinv, steelinv)
+        print "You have %d wood and %d steel. With a maximum inventory of %d" % (woodinv, steelinv, maxinv)
         command()
     elif c in ("Advance", "advance", "Adv", "adv", "A", "a"):
         nextday()
