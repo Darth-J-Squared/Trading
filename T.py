@@ -1,5 +1,6 @@
 from random import *
 bal = 0 #your total balance of money
+legacybal = 0
 storewood = 0
 woodprice = 0
 woodinv = 0
@@ -10,6 +11,7 @@ pricechangewood = 0
 pricechangesteel = 0
 displaypricechangewood = 0
 maxinv = 100
+counter = 8
 woodchange = "You shouldn't see this. Anyway, hi!"
 
 
@@ -184,7 +186,12 @@ def nextday():
     global displaypricechangesteel
     global woodchange
     global steelchange
+    global counter
+    global bal
+    global legacybal
+    legacybal = bal
     print "Proceeding to next day."
+    counter += 1
     legacywoodprice = '%.2f' % round(woodprice, 2)
     pricechangewood = uniform(.6, 1.4)
     if pricechangewood > 1:
@@ -203,6 +210,10 @@ def nextday():
     steelprice *= pricechangesteel
     displaysteelprice = '%.2f' % round(steelprice, 2)
     displaypricechangesteel = "%.0f%%" % (pricechangesteel * 100 - 100)
+    if counter == 10:
+        bal *= 0.9
+        counter = 0
+        print "Tax day! You lost 10%% of your total cash balance, from $%d to $%d. Gotta love government!\n" % (legacybal, bal)
     print "The price of wood changed to $%s from $%s, a %s of %s. The price of steel changed to $%s from $%s, a %s of %s" % (displaywoodprice, legacywoodprice, woodchange, displaypricechangewood, displaysteelprice, legacysteelprice, steelchange, displaypricechangesteel)
     command()
 
