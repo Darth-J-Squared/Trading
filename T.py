@@ -200,10 +200,5 @@ def nextday():
     displaypricechangesteel = "%.0f%%" % (pricechangesteel * 100 - 100)
     print "The price of wood changed to $%s from $%s, a %s of %s. The price of steel changed to $%s from $%s, a %s of %s" % (displaywoodprice, legacywoodprice, woodchange, displaypricechangewood, displaysteelprice, legacysteelprice, steelchange, displaypricechangesteel)
     command()
-def Stockmarket():
-    print "Welcome to the wonderful world of making money out of speculation!"
-    if inventory >= 20:
-        print "That's a lot of wood."
-        command()
-    command()
+
 command()
