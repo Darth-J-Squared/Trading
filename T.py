@@ -15,7 +15,7 @@ woodchange = "You shouldn't see this. Anyway, hi!"
 storewood += 24
 woodprice += 153
 bal += 123456
-steelprice += 50
+steelprice += 500
 storesteel += 100
 def command():
     global bal
@@ -27,7 +27,7 @@ def command():
         bal += mm
         command()
     elif c in ("Balance", "balance", "Bal", "bal"):
-        print "Your balance is %d dollars." % (bal)
+        print "Your balance is $%d dollars." % (bal)
         command()
     elif c in ("Buy", "buy", "B", "b"):
         buy()
@@ -68,7 +68,7 @@ def buy():
             print "You can't buy negative wood."
             command()
         else:
-            print "You are buying %d wood at %d a piece, for a total of %d dollars, leaving you with a balance of %d" % (amount, woodprice, pp, bal - pp)
+            print "You are buying %d wood at $%d a piece, for a total of $%d, leaving you with a balance of $%d" % (amount, woodprice, pp, bal - pp)
             confirm = raw_input("Purchase?\n>")
             if confirm in ("Yes", "yes", "Y", "y"):
                 storewood -= amount
@@ -93,7 +93,7 @@ def buy():
             print "You can't buy negative steel."
             command()
         else:
-            print "You are buying %d steel at %d a piece, for a total of %d dollars, leaving you with a balance of %d" % (steelamount, steelprice, spp, bal - spp)
+            print "You are buying %d steel at $%d a piece, for a total of $%d, leaving you with a balance of $%d" % (steelamount, steelprice, spp, bal - spp)
             confirm = raw_input("Purchase?\n>")
             if confirm in ("Yes", "yes", "Y", "y"):
                 storesteel -= steelamount
@@ -130,7 +130,7 @@ def sell():
         elif amount > woodinv:
             print "You don't have that much wood."
             command()
-        print "You are selling %d wood at %d a piece, for a total of %d dollars, leaving you with a balance of %d" % (amount, woodprice, sp, bal + sp)
+        print "You are selling %d wood at $%d a piece, for a total of $%d, leaving you with a balance of $%d" % (amount, woodprice, sp, bal + sp)
         confirm = raw_input("Sell?\n>")
         if confirm in ("Yes", "yes", "Y", "y"):
             woodinv -= amount
@@ -151,7 +151,7 @@ def sell():
             elif steelamount > steelinv:
                 print "You don't have that much steel."
                 command()
-            print "You are selling %d steel at %d a piece, for a total of %d dollars, leaving you with a balance of %d" % (steelamount, steelprice, steelsp, bal + steelsp)
+            print "You are selling %d steel at $%d a piece, for a total of $%d , leaving you with a balance of $%d" % (steelamount, steelprice, steelsp, bal + steelsp)
             confirm = raw_input("Sell?\n>")
             if confirm in ("Yes", "yes", "Y", "y"):
                 steelinv -= steelamount
@@ -168,7 +168,7 @@ def sell():
 def NY():
     global storewood
     global woodprice
-    print "Welcome to the New York market. There is %d wood at %d a piece. There is also %d steel at %d a piece." % (storewood, woodprice, storesteel, steelprice)
+    print "Welcome to the New York market. There is %d wood at $%d a piece. There is also %d steel at $%d a piece." % (storewood, woodprice, storesteel, steelprice)
     command()
 def nextday():
     global woodprice
@@ -176,7 +176,9 @@ def nextday():
     global pricechangewood
     global pricechangesteel
     global displaypricechangewood
+    global displaypricechangesteel
     global woodchange
+    global steelchange
     print "Proceeding to next day."
     legacywoodprice = '%.2f' % round(woodprice, 2)
     pricechangewood = uniform(.6, 1.4)
@@ -187,7 +189,16 @@ def nextday():
     woodprice *= pricechangewood
     displaywoodprice = '%.2f' % round(woodprice, 2)
     displaypricechangewood = "%.0f%%" % (pricechangewood * 100 - 100)
-    print "The price of wood changed to %s from %s, a %s of %s." % (displaywoodprice, legacywoodprice, woodchange, displaypricechangewood)
+    legacysteelprice = '%.2f' % round(steelprice, 2)
+    pricechangesteel = uniform(.6, 1.4)
+    if pricechangesteel > 1:
+        steelchange = "increase"
+    else:
+        steelchange = "decrease"
+    steelprice *= pricechangesteel
+    displaysteelprice = '%.2f' % round(steelprice, 2)
+    displaypricechangesteel = "%.0f%%" % (pricechangesteel * 100 - 100)
+    print "The price of wood changed to $%s from $%s, a %s of %s. The price of steel changed to $%s from $%s, a %s of %s" % (displaywoodprice, legacywoodprice, woodchange, displaypricechangewood, displaysteelprice, legacysteelprice, steelchange, displaypricechangesteel)
     command()
 def Stockmarket():
     print "Welcome to the wonderful world of making money out of speculation!"
