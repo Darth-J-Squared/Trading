@@ -3,9 +3,11 @@ bal = 0 #your total balance of money
 legacybal = 0
 storewood = 0
 woodprice = 0
+woodmedianprice = 150
 woodinv = 0
 storesteel = 0
 steelprice = 0
+steelmedianprice = 500
 steelinv = 0
 pricechangewood = 0
 pricechangesteel = 0
@@ -16,9 +18,9 @@ woodchange = "You shouldn't see this. Anyway, hi!"
 
 
 storewood += 104
-woodprice += 153
+woodprice = woodmedianprice
 bal += 123456
-steelprice += 500
+steelprice = steelmedianprice
 storesteel += 100
 def command():
     global bal
@@ -181,6 +183,8 @@ def NY():
 def nextday():
     global woodprice
     global steelprice
+    global woodmedianprice
+    global steelmedianprice
     global pricechangewood
     global pricechangesteel
     global displaypricechangewood
@@ -199,7 +203,7 @@ def nextday():
         woodchange = "increase"
     else:
         woodchange = "decrease"
-    woodprice *= pricechangewood
+    woodprice = pricechangewood * woodmedianprice
     displaywoodprice = '%.2f' % round(woodprice, 2)
     displaypricechangewood = "%.0f%%" % (pricechangewood * 100 - 100)
     legacysteelprice = '%.2f' % round(steelprice, 2)
@@ -208,14 +212,15 @@ def nextday():
         steelchange = "increase"
     else:
         steelchange = "decrease"
-    steelprice *= pricechangesteel
+
+    steelprice = pricechangesteel * steelmedianprice
     displaysteelprice = '%.2f' % round(steelprice, 2)
     displaypricechangesteel = "%.0f%%" % (pricechangesteel * 100 - 100)
     if counter == 10:
         bal *= 0.9
         counter = 0
         print "Tax day! You lost 10%% of your total cash balance, from $%d to $%d. Gotta love government!\n" % (legacybal, bal)
-    print "The price of wood changed to $%s from $%s, a %s of %s. The price of steel changed to $%s from $%s, a %s of %s" % (displaywoodprice, legacywoodprice, woodchange, displaypricechangewood, displaysteelprice, legacysteelprice, steelchange, displaypricechangesteel)
+    print "The price of wood changed to $%s from $%s.\nThe price of steel changed to $%s from $%s." % (displaywoodprice, legacywoodprice, displaysteelprice, legacysteelprice)
     command()
 
 command()
