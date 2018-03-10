@@ -13,13 +13,13 @@ pricechangewood = 0
 pricechangesteel = 0
 displaypricechangewood = 0
 maxinv = 100
-counter = 8
+counter = 0
 woodchange = "You shouldn't see this. Anyway, hi!"
 
 
-storewood += 104
+storewood += 300
 woodprice = woodmedianprice
-bal += 123456
+bal += 10000
 steelprice = steelmedianprice
 storesteel += 100
 def command():
@@ -44,8 +44,10 @@ def command():
         command()
     elif c in ("Advance", "advance", "Adv", "adv", "A", "a"):
         nextday()
+    elif c in ("Explain", "explain", "exp", "exp"):
+        explain()
     elif c in ("Help", "help"):
-        print "Available commands are store, balance, buy, sell, advance, and inventory."
+        print "Available commands are explain, store, balance, buy, sell, advance, and inventory."
         command()
     else:
         print "Command not recognized."
@@ -183,6 +185,8 @@ def NY():
 def nextday():
     global woodprice
     global steelprice
+    global storewood
+    global storesteel
     global woodmedianprice
     global steelmedianprice
     global pricechangewood
@@ -196,6 +200,8 @@ def nextday():
     global legacybal
     legacybal = bal
     print "Proceeding to next day."
+    storewood += 20
+    storesteel += 20
     counter += 1
     legacywoodprice = '%.2f' % round(woodprice, 2)
     pricechangewood = uniform(.6, 1.4)
@@ -222,5 +228,25 @@ def nextday():
         print "Tax day! You lost 10%% of your total cash balance, from $%d to $%d. Gotta love government!\n" % (legacybal, bal)
     print "The price of wood changed to $%s from $%s.\nThe price of steel changed to $%s from $%s." % (displaywoodprice, legacywoodprice, displaysteelprice, legacysteelprice)
     command()
-
-command()
+def explain():
+    print "Welcome to yet to be named trading game project! I made this because i was super bored."
+    raw_input("Press enter to continue to the next line in this tutorial...")
+    print "In this game you will buy and sell resources, and try to make money."
+    raw_input()
+    print "Prices change day to day so pay attention for good deals."
+    raw_input()
+    print "Also, watch out for the government. Every 15 days you will be taxed 10%% of your current cash balance."
+    raw_input()
+    print "You can check your current balance with \"balance\"."
+    raw_input()
+    print "Generally you will want to check the store pries with \"store\". They change every day so be sure to check back"
+    raw_input()
+    print "You can buy items with \"buy\", and then sell those items with \"sell\"."
+    raw_input()
+    print "Check which products and how much you have with \"inventory\", but watch out, you can only hold 100 items currently."
+    raw_input()
+    print "When you are happy with your transactions, go to the next day with \"advance\" to have prices change and product restock at stores."
+    raw_input()
+    print "Finally, have fun!(If you ever want to read this text again, enter \"explain\".)"
+    command()
+explain()
