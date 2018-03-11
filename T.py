@@ -93,23 +93,25 @@ def buy():
                 command()
     elif b in ("Steel", "steel"):
         print "How much would you like to buy? (there is %d left.)" % (storesteel)
-        steelamount = input(">")
-        spp = steelamount * steelprice
-        if steelamount > storesteel:
+        amount = input(">")
+        spp = amount * steelprice
+        if amount > storesteel:
             print "There isn't that much product left."
             buy()
-        elif steelamount * steelprice > bal:
+        elif amount * steelprice > bal:
             print "You don't have enough funds to complete the transaction."
             command()
-        elif steelamount < 0:
+        elif amount < 0:
             print "You can't buy negative steel."
+        elif woodinv + steelinv + amount > maxinv:
+            print "You do not have enough inventory space."
             command()
         else:
-            print "You are buying %d steel at $%d a piece, for a total of $%d, leaving you with a balance of $%d" % (steelamount, steelprice, spp, bal - spp)
+            print "You are buying %d steel at $%d a piece, for a total of $%d, leaving you with a balance of $%d" % (amount, steelprice, spp, bal - spp)
             confirm = raw_input("Purchase?\n>")
             if confirm in ("Yes", "yes", "Y", "y"):
-                storesteel -= steelamount
-                steelinv += steelamount
+                storesteel -= amount
+                steelinv += amount
                 bal -= spp
                 print "Purchase completed."
                 command()
